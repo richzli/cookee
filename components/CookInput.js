@@ -28,7 +28,7 @@ export default class CookInput extends Component<{}> {
           onChangeText={value => this.setState({ dish: value })}
         />
         <TextInput
-          placeholder='Ingredients (each on new line)'
+          placeholder='Ingredients needed (each on new line)'
           style={styles.bigTextInput}
           multiline={true}
           onChangeText={value => this.setState({ ingredients: value.split('\n') })}

@@ -1,27 +1,16 @@
 import firebase from 'firebase';
 import 'firebase/firestore';
 
-import {
-  API_KEY,
-  AUTH_DOMAIN,
-  DATABASE_URL,
-  PROJECT_ID,
-  STORAGE_BUCKET,
-  MESSAGING_SENDER_ID,
-  APP_ID
-} from "react-native-dotenv"
-
 const config = {
-  apiKey: API_KEY,
-  authDomain: AUTH_DOMAIN,
-  databaseURL: DATABASE_URL,
-  projectId: PROJECT_ID,
-  storageBucket: STORAGE_BUCKET,
-  messagingSenderId: MESSAGING_SENDER_ID,
-  appId: APP_ID
+  apiKey: 'AIzaSyAUD3amZbRQqUgvJi9Qp4BWR3dsCe0JPzQ',
+  authDomain: 'cookee-app.firebaseapp.com',
+  databaseURL: 'https://cookee-app.firebaseio.com',
+  projectId: 'cookee-app',
+  storageBucket: 'cookee-app.appspot.com',
+  messagingSenderId: '279653985796',
+  appId: '1:279653985796:web:32371c45ad1c2702dbcf51'
 }
 
 let app = firebase.initializeApp(config);
 
-export app;
 export const firestore = app.firestore();
