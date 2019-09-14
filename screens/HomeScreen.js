@@ -11,16 +11,9 @@ import {
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
+import CookInput from '../components/CookInput';
 
 export default function HomeScreen() {
-
-  state = {
-    name: "",
-    ingredients: []
-  }
-
-  const { name, ingredients } = this.state
-
   return (
     <View style={styles.container}>
       <ScrollView
@@ -60,19 +53,6 @@ export default function HomeScreen() {
           </TouchableOpacity>
         </View>
       </ScrollView>
-
-      <View style={styles.tabBarInfoContainer}>
-        <Text style={styles.tabBarInfoText}>
-          This is a tab bar. You can edit it in:
-        </Text>
-
-        <View
-          style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-          <MonoText style={styles.codeHighlightText}>
-            navigation/MainTabNavigator.js
-          </MonoText>
-        </View>
-      </View>
     </View>
   );
 }
