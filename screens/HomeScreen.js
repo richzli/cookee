@@ -13,6 +13,14 @@ import {
 import { MonoText } from '../components/StyledText';
 
 export default function HomeScreen() {
+
+  state = {
+    name: "",
+    ingredients: []
+  }
+
+  const { name, ingredients } = this.state
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -195,4 +203,13 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#2e78b7',
   },
+  textInput: {
+    height: 30,
+    textAlign: "center",
+    color: "#333333",
+    marginBottom: 10,
+    fontSize: 24,
+    borderWidth: 1,
+    borderBottomColor: "#111111"
+  }
 });
