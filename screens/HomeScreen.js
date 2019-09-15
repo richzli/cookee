@@ -12,8 +12,6 @@ import {
 import { Container, Header, Content, Card, CardItem, Thumbnail, Icon, Left, Body, Button } from 'native-base';
 import { MonoText } from '../components/StyledText';
 import ChatInputBox from '../components/ChatInputBox';
-import { getNewDataSource } from 'react-native/Libraries/Experimental/SwipeableRow/SwipeableListView';
-import { firestore } from '../config/firebase';
 import { PrintPost } from '../components/PrintPost';
 
 
@@ -40,21 +38,28 @@ export default function HomeScreen() {
   
 }
 
-return (
-  <View style={styles.container}>
-    <PrintPost title="hi" date={new Date().toDateString()} message={messageText}></PrintPost>
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.contentContainer}>
-      <View style={styles.getStartedContainer}>
-        <DevelopmentModeNotice />
+  return (
+    
 
+    <View style={styles.container}>
+      <PrintPost title="dab" date={new Date().toDateString()} message="heya" likes="342"></PrintPost>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}>
+        <View style={styles.getStartedContainer}>
+          <DevelopmentModeNotice />
 
-        <Text style={styles.getStartedText}>REEEEEE</Text>
+           
+          <Text style={styles.getStartedText}>REEEEEE</Text>
 
-        <View
-          style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-          <MonoText>screens/HomeScreen.js</MonoText>
+          <View
+            style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
+            <MonoText>screens/HomeScreen.js</MonoText>
+          </View>
+
+          <Text style={styles.getStartedText}>
+            Change this text and your app will automatically reload.
+          </Text>
         </View>
 
         <Text style={styles.getStartedText}>
