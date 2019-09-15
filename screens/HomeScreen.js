@@ -8,13 +8,10 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Button,
 } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Icon, Left, Body, Button } from 'native-base';
 import { MonoText } from '../components/StyledText';
 import ChatInputBox from '../components/ChatInputBox';
-import { getNewDataSource } from 'react-native/Libraries/Experimental/SwipeableRow/SwipeableListView';
-import { firestore } from '../config/firebase';
 import { PrintPost } from '../components/PrintPost';
 
 
@@ -23,7 +20,7 @@ export default function HomeScreen() {
     
 
     <View style={styles.container}>
-      <PrintPost title="hi" date={new Date().toDateString()} message="test message"></PrintPost>
+      <PrintPost title="dab" date={new Date().toDateString()} message="heya" likes="342"></PrintPost>
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
