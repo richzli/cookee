@@ -66,7 +66,7 @@ export default function HomeScreen() {
 
       // console.log(" i was here 2 ");
 
-      console.log(messagess);
+      // console.log(messagess);
       for (i = messagess.length - 1; i >= 0; i--) {
         const { message, timestamp, useremail, thumbnail } = messagess[i];
         m.push(message);
@@ -74,8 +74,8 @@ export default function HomeScreen() {
         e.push(useremail);
       }
 
-      console.log(m);
-      console.log(t);
+      // console.log(m);
+      // console.log(t);
       setMessageArray(m);
       setTimeArray(t);
       setMessages(messagess);
@@ -85,7 +85,6 @@ export default function HomeScreen() {
       console.error("Error getting document:", error);
     }
   };
-
 
   for (i = 0; i < messages.length; i++) {
     array.push(
@@ -98,22 +97,19 @@ export default function HomeScreen() {
     );
   }
 
-
-
-    // firestore.collection("chat").get().then(function(querySnapshot) {
-    //     querySnapshot.forEach(function(doc) {
-    //       if (doc.exists) {
-    //         console.warn("Document data:", doc.data());
-    //       } else {
-    //         // doc.data() will be undefined in this case
-    //         console.warn("No such document!");
-    //       }
-    //     });
-    // }).catch(function(error) {
-    //     console.warn("Error getting document:", error);
-    // });
-    // }
-
+  // firestore.collection("chat").get().then(function(querySnapshot) {
+  //     querySnapshot.forEach(function(doc) {
+  //       if (doc.exists) {
+  //         console.warn("Document data:", doc.data());
+  //       } else {
+  //         // doc.data() will be undefined in this case
+  //         console.warn("No such document!");
+  //       }
+  //     });
+  // }).catch(function(error) {
+  //     console.warn("Error getting document:", error);
+  // });
+  // }
 
   // firestore.collection("chat").get().then(function(querySnapshot) {
   //     querySnapshot.forEach(function(doc) {
@@ -136,7 +132,6 @@ export default function HomeScreen() {
         contentContainerStyle={styles.contentContainer}
       >
         {array}
-
 
         {/* <View style={styles.getStartedContainer}>
           <DevelopmentModeNotice />
