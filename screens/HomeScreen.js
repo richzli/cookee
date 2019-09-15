@@ -86,6 +86,7 @@ export default function HomeScreen() {
     }
   };
 
+
   for (i = 0; i < messages.length; i++) {
     array.push(
       <PrintPost
@@ -96,6 +97,23 @@ export default function HomeScreen() {
       ></PrintPost>
     );
   }
+
+
+
+    // firestore.collection("chat").get().then(function(querySnapshot) {
+    //     querySnapshot.forEach(function(doc) {
+    //       if (doc.exists) {
+    //         console.warn("Document data:", doc.data());
+    //       } else {
+    //         // doc.data() will be undefined in this case
+    //         console.warn("No such document!");
+    //       }
+    //     });
+    // }).catch(function(error) {
+    //     console.warn("Error getting document:", error);
+    // });
+    // }
+
 
   // firestore.collection("chat").get().then(function(querySnapshot) {
   //     querySnapshot.forEach(function(doc) {
@@ -119,8 +137,20 @@ export default function HomeScreen() {
       >
         {array}
 
+
         {/* <View style={styles.getStartedContainer}>
           <DevelopmentModeNotice />
+
+      <View style={styles.getStartedContainer}>
+        
+
+        <View
+          style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
+          <MonoText>Welcome to the forum</MonoText>
+        </View>
+
+      </View>
+
 
           <Text style={styles.getStartedText}>REEEEEE</Text>
 
