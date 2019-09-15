@@ -15,6 +15,7 @@ import { Container, Header, Content, Card, CardItem, Thumbnail, Icon, Left, Body
 import { MonoText } from '../components/StyledText';
 import ChatInputBox from '../components/ChatInputBox';
 import { PrintPost } from '../components/PrintPost';
+import { firestore } from '../config/firebase';
 
 const DATA = [
   {
@@ -24,12 +25,13 @@ const DATA = [
 ]
 
 export default function HomeScreen() {
-  const [messageText, setMessageText] = useState('')
-  const [timestampValue, setTimestampValue] = useState(0)
+  const [messageText, setMessageText] = useState('');
+  const [timestampValue, setTimestampValue] = useState(0);
 
   getData = async () => {
     try {
-      const doc = await firestore.collection('chat').doc('XLOK7PlDGmhEcM0SqlYo').get()
+      const doc = await firestore.collection('chat').doc('XLOK7PlDGmhEcM0SqlYo').get();
+
       if (doc.exists) {
         console.warn("Document data:", doc.data());
         const { message, timestamp } = doc.data();
@@ -40,11 +42,22 @@ export default function HomeScreen() {
       }
     } catch (error) {
       console.error("Error getting document:", error);
-    }
+    } 
 
-
-  
-}
+    // firestore.collection("chat").get().then(function(querySnapshot) {
+    //     querySnapshot.forEach(function(doc) {
+    //       if (doc.exists) {
+    //         console.warn("Document data:", doc.data());
+    //       } else {
+    //         // doc.data() will be undefined in this case
+    //         console.warn("No such document!");
+    //       }
+    //     });
+    // }).catch(function(error) {
+    //     console.warn("Error getting document:", error);
+    // });
+    // }
+  }
 
   return (
     <View style={styles.container}>
@@ -52,7 +65,7 @@ export default function HomeScreen() {
       style={styles.container}
       contentContainerStyle={styles.contentContainer}>
        
-        <PrintPost title="dab" date={new Date().toDateString()} message="heya" likes="342"></PrintPost>
+        <PrintPost title="dab" date={new Date().toDateString()} message={messageText} likes="342"></PrintPost>
         <PrintPost title="dab" date={new Date().toDateString()} message="heya" likes="342"></PrintPost>
         <PrintPost title="dab" date={new Date().toDateString()} message="heya" likes="342"></PrintPost>
         <PrintPost title="dab" date={new Date().toDateString()} message="heya" likes="342"></PrintPost>
@@ -81,11 +94,11 @@ export default function HomeScreen() {
       <Button
         title={'GET'}
         style={styles.sendBox}
-        onPress={() => { getData(); }}
+        onPress={() => { getData() }}
       />
     </ScrollView>
   </View>
-);
+  );
 
 }
 
