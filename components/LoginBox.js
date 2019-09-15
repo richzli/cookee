@@ -15,25 +15,28 @@ export default class LoginBox extends Component {
 	}
 
 	login() {
-		firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).catch(
+		firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then(() => {
+			this.setState({ email: '', password: ''});
+			alert('Login successful!');
+		}).catch(
 			function(error) {
 				alert(error.message);
 				return;
 			}
 		);
-		this.setState({ email: '', password: ''});
-		alert('Signup successful!');
+		
 	}
 
 	signup() {
-		firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch(
+		firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then(() => {
+			this.setState({ email: '', password: ''});
+			alert('Signup successful!');
+		}).catch(
 			function(error) {
 				alert(error.message);
 				return;
 			}
 		);
-		this.setState({ email: '', password: ''});
-		alert('Login successful!');
 	}
 
 	render () {
