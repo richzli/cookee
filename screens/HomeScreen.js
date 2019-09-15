@@ -1,5 +1,6 @@
 import * as WebBrowser from 'expo-web-browser';
 import React, { Component, useState } from 'react';
+import {firestore} from '../config/firebase';
 import {
   Image,
   Platform,
@@ -15,50 +16,57 @@ import { Container, Header, Content, Card, CardItem, Thumbnail, Icon, Left, Body
 import { MonoText } from '../components/StyledText';
 import ChatInputBox from '../components/ChatInputBox';
 import { PrintPost } from '../components/PrintPost';
-
-const DATA = [
-  {
-    titles: 'dab',
-    dates: ['134123','12321321'],
-  }
-]
-
 export default function HomeScreen() {
-  const [messageText, setMessageText] = useState('')
-  const [timestampValue, setTimestampValue] = useState(0)
-
+  var [messageArray, setMessageArray] = useState([])
+  var [timeArray, setTimeArray] = useState([])
+  var [messages, setMessages] = useState([])
+  var [emails, setEmails] = useState([])
+  var [thumbnails, setThumbnails] = useState([])
+  var e = [];
+  var m = [];
+  var t = [];
+  var th = [];
+  var array = [];
+  var messagess = [];
   getData = async () => {
     try {
-      const doc = await firestore.collection('chat').doc('XLOK7PlDGmhEcM0SqlYo').get()
-      if (doc.exists) {
-        console.warn("Document data:", doc.data());
-        const { message, timestamp } = doc.data();
-        setMessageText(message);
-      } else {
-        // doc.data() will be undefined in this case
-        console.warn("No such document!");
+      const {docs} = await firestore.collection('chat').orderBy('timestamp', 'desc').limit(5).get();
+      messagess = docs.map(doc => doc.data());
+
+      console.log(messagess)
+      for(i=0;i<messagess.length;i++){
+        const {message, timestamp, useremail,thumbnail} = messagess[i];
+        m.push(message);
+        t.push(timestamp);
+        e.push(useremail)
       }
+      
+      console.log(m)
+      console.log(t)
+      setMessageArray(m);
+      setTimeArray(t);
+      setMessages(messagess);
+      setEmails(e);
+      setThumbnails(th);
+      
+  
     } catch (error) {
       console.error("Error getting document:", error);
     }
-
+  }
 
   
-}
-
+  for(i=0;i<messages.length;i++){
+    array.push(<PrintPost title={emails[messages.length-i-1]} date={new Date(timeArray[messages.length-i-1]).toDateString()} message={messageArray[messages.length-i-1]} thumbnail={thumbnails[messages.length-i-1]}></PrintPost>);
+ }
   return (
     <View style={styles.container}>
     <ScrollView
       style={styles.container}
       contentContainerStyle={styles.contentContainer}>
-       
-        <PrintPost title="dab" date={new Date().toDateString()} message="heya" likes="342"></PrintPost>
-        <PrintPost title="dab" date={new Date().toDateString()} message="heya" likes="342"></PrintPost>
-        <PrintPost title="dab" date={new Date().toDateString()} message="heya" likes="342"></PrintPost>
-        <PrintPost title="dab" date={new Date().toDateString()} message="heya" likes="342"></PrintPost>
-       
- 
-        
+
+        {array}
+
       <View style={styles.getStartedContainer}>
         <DevelopmentModeNotice />
         
@@ -81,7 +89,7 @@ export default function HomeScreen() {
       <Button
         title={'GET'}
         style={styles.sendBox}
-        onPress={() => { getData(); }}
+        onPress={() =>  {getData();} }
       />
     </ScrollView>
   </View>
@@ -253,4 +261,3 @@ const styles = StyleSheet.create({
     borderBottomColor: "#111111"
   }
 });
-
