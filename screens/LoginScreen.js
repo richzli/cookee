@@ -1,17 +1,37 @@
-import React from 'react';
-import { View, TouchableWithoutFeedback } from 'react-native';
-import DismissKeyboard from 'dismissKeyboard';
+import React, { useState } from "react";
+import { View, TextInput } from "react-native";
 
-import LoginBox from '../components/LoginBox';
+import LoginBox from "../components/LoginBox";
+import SignoutBox from "../components/SignoutBox";
+import { firebase } from "../config/firebase";
 
 export default function LoginScreen() {
-  return (
-    <TouchableWithoutFeedback onPress={() => {DismissKeyboard()}}>
-      <LoginBox />
-    </TouchableWithoutFeedback>
-  );
+  // return (
+  //   <View style={{ justifyContent: "center" }}>
+  //     <LoginBox />
+  //     <SignoutBox />
+  //   </View>
+  // );
+  const [user, setUser] = useState(null);
+
+  firebase.auth().onAuthStateChanged(function(user) {
+    setUser(user);
+  });
+
+  if (user)
+    return (
+      <View style={{ justifyContent: "center", alignItems: "center" }}>
+        <SignoutBox />
+      </View>
+    );
+  else
+    return (
+      <View style={{ justifyContent: "center" }}>
+        <LoginBox />
+      </View>
+    );
 }
 
 LoginScreen.navigationOptions = {
-  title: 'Login',
+  title: "User"
 };
