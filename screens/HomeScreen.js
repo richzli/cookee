@@ -33,7 +33,7 @@ export default function HomeScreen() {
   getData = async () => {
     try {
       const doc = await firestore.collection('chat').doc('XLOK7PlDGmhEcM0SqlYo').get();
-
+      console.warn(doc.data());
       if (doc.exists) {
         console.warn("Document data:", doc.data());
         const { message, timestamp } = doc.data();
