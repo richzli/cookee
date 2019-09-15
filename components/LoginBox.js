@@ -4,7 +4,9 @@ import {
 	TextInput,
 	Button,
 	StyleSheet,
+	TouchableWithoutFeedback,
 } from 'react-native';
+import DismissKeyboard from 'dismissKeyboard';
 
 import { firebase } from '../config/firebase';
 
@@ -43,42 +45,46 @@ export default class LoginBox extends Component {
 		const { email, password } = this.state;
 
 		return (
-			<View>
-				<TextInput
-					value={email}
-					style={styles.inputBox}
-					placeholder={'Email'}
-					onChangeText={value => { this.setState({ email: value }); }} />
-				<TextInput
-					value={password}
-					style={styles.inputBox}
-					placeholder={'Password'}
-					onChangeText={value => { this.setState({ password: value }); }} />
-				<View style={{ flexDirection: 'row', marginLeft: 30, marginRight: 30 }}>
-					<Button
-						title={'Login'}
-						style={styles.button}
-						onPress={() => {this.login();}} />
-					<Button
-						title={'Sign up'}
-						style={styles.button}
-						onPress={() => {this.signup();}} />
+			<TouchableWithoutFeedback onPress={() => {DismissKeyboard()}}>
+				<View style={styles.container}>
+					<TextInput
+						value={email}
+						style={styles.inputBox}
+						placeholder={'Email'}
+						onChangeText={value => { this.setState({ email: value }); }} />
+					<TextInput
+						value={password}
+						style={styles.inputBox}
+						placeholder={'Password'}
+						onChangeText={value => { this.setState({ password: value }); }} />
+					<View style={{ flexDirection: 'row', marginLeft: 30, marginRight: 30 }}>
+						<Button
+							title={'Login'}
+							style={styles.button}
+							onPress={() => {this.login();}} />
+						<Button
+							title={'Sign up'}
+							style={styles.button}
+							onPress={() => {this.signup();}} />
+					</View>
 				</View>
-			</View>
+			</TouchableWithoutFeedback>
 		);
 	}
 }
 
 const styles = StyleSheet.create({
 	container: {
-		alignItems: 'center',
+		justifyContent: 'center',
+		alignItems: 'stretch',
+		marginLeft: 30,
+		marginRight: 30,
 	},
 	inputBox: {
 		height: 30,
 		borderWidth: 1,
     marginBottom: 20,
 		borderColor: '#111111',
-		justifyContent: 'center',
 	},
 	button: {
 		flex: 1,

@@ -6,5 +6,7 @@ A chat? app
 
 yarn add firebase
 
+yarn add react-native-keyboard-spacer
+
 npm install native-base --save
 

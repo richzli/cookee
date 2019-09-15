@@ -10,6 +10,8 @@ import {
   View
 } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Icon, Left, Body, Button } from 'native-base';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
+
 import { MonoText } from '../components/StyledText';
 import ChatInputBox from '../components/ChatInputBox';
 import { getNewDataSource } from 'react-native/Libraries/Experimental/SwipeableRow/SwipeableListView';
@@ -57,6 +59,7 @@ export default function HomeScreen() {
          onPress={() => { getData(); }}
         />
       </ScrollView>
+      <KeyboardSpacer />
     </View>
   );
 }

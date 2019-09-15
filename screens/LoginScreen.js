@@ -1,12 +1,14 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, TouchableWithoutFeedback } from 'react-native';
+import DismissKeyboard from 'dismissKeyboard';
+
 import LoginBox from '../components/LoginBox';
 
 export default function LoginScreen() {
   return (
-    <View style={{ flex: 1 , justifyContent: 'center', alignItems: 'center' }}>
+    <TouchableWithoutFeedback onPress={() => {DismissKeyboard()}}>
       <LoginBox />
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
