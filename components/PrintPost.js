@@ -12,10 +12,9 @@ import {
   
   export function PrintPost(props){
     return(
-        <Container>
-        <Header />
-        <Content>
-          <Card style={{flex: 0}}>
+        <Content>      
+<Card style={{flex: 0, overflow: "scroll"}}>
+   
             <CardItem>
               <Left>
                 <Body>
@@ -40,7 +39,6 @@ import {
               </Left>
             </CardItem>
           </Card>
-        </Content>
-      </Container>
+          </Content>
   );
 }

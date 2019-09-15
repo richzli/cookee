@@ -6,47 +6,53 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  SafeAreaView,
   TouchableOpacity,
   View,
+  SectionList,
 } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Icon, Left, Body, Button } from 'native-base';
 import { MonoText } from '../components/StyledText';
 import ChatInputBox from '../components/ChatInputBox';
 import { PrintPost } from '../components/PrintPost';
 
+const DATA = [
+  {
+    titles: 'dab',
+    dates: ['134123','12321321'],
+  }
+]
 
 export default function HomeScreen() {
   return (
-    
-
     <View style={styles.container}>
-      <PrintPost title="dab" date={new Date().toDateString()} message="heya" likes="342"></PrintPost>
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}>
-        <View style={styles.getStartedContainer}>
-          <DevelopmentModeNotice />
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.contentContainer}>
+       
+        <PrintPost title="dab" date={new Date().toDateString()} message="heya" likes="342"></PrintPost>
+        <PrintPost title="dab" date={new Date().toDateString()} message="heya" likes="342"></PrintPost>
+        <PrintPost title="dab" date={new Date().toDateString()} message="heya" likes="342"></PrintPost>
+        <PrintPost title="dab" date={new Date().toDateString()} message="heya" likes="342"></PrintPost>
+       
+ 
+        
+      <View style={styles.getStartedContainer}>
+        <DevelopmentModeNotice />
+        
+         
+        <Text style={styles.getStartedText}>REEEEEE</Text>
 
-           
-          <Text style={styles.getStartedText}>REEEEEE</Text>
-
-          <View
-            style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-            <MonoText>screens/HomeScreen.js</MonoText>
-          </View>
-
-          <Text style={styles.getStartedText}>
-            Change this text and your app will automatically reload.
-          </Text>
+        <View
+          style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
+          <MonoText>screens/HomeScreen.js</MonoText>
         </View>
 
-        <View style={styles.helpContainer}>
-          <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-            <Text style={styles.helpLinkText}>
-              Help, it didn’t automatically reload!
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <Text style={styles.getStartedText}>
+          Change this text and your app will automatically reload.
+        </Text>
+      </View>
+
 
         <ChatInputBox />
         <Button 
