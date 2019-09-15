@@ -7,10 +7,11 @@ import {
 	Button,
 } from 'react-native';
 
-import { firestore } from '../config/firebase';
+import firestore, { firebase } from '../config/firebase';
 
 export default class ChatInputBox extends Component {
   state = {
+    useremail: '',
     message: '',
     timestamp: 0,
   };
@@ -19,7 +20,7 @@ export default class ChatInputBox extends Component {
     if (!(this.state.message === '')) {
       let date = new Date();
       let time = date.getTime();
-      this.setState({ timestamp: time }, () => {
+      this.setState({ useremail: firebase.auth().currentUser.email, timestamp: time }, () => {
         firestore.collection('chat').add(this.state).then( () => {
           this.setState({ message: '' });
         });

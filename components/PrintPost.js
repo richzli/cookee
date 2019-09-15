@@ -9,7 +9,7 @@ import {
     View,
   } from 'react-native';
   import { Container, Header, Content, Card, CardItem, Thumbnail, Icon, Left, Body, Button } from 'native-base';
-  
+
   export function PrintPost(props){
     
     return(
@@ -20,8 +20,8 @@ import {
               <Left>
                 <Thumbnail source = {{uri: props.url}} />
                 <Body>
-                  <Text>{props.title}</Text>
-                  <Text note>{props.date}</Text>
+                  <Text style={styles.wordBold}>{props.title}</Text>
+                  <Text style={styles.italicText}>{props.date}</Text>
                 </Body>
               </Left>
             </CardItem>
@@ -44,3 +44,31 @@ import {
           </Content>
   );
 }
+
+  const styles = StyleSheet.create ({
+   container: {
+      alignItems: 'center',
+      marginTop: 100,
+      padding: 20
+   },
+   text: {
+      color: 'black',
+   },
+   capitalLetter: {
+      color: 'black',
+      fontSize: 20
+   },
+   wordBold: {
+      fontWeight: 'bold',
+      color: 'black'
+   },
+   italicText: {
+      color: 'grey',
+      fontStyle: 'italic'
+   },
+   textShadow: {
+      textShadowColor: 'red',
+      textShadowOffset: { width: 2, height: 2 },
+      textShadowRadius : 5
+   }
+})

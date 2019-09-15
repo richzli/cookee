@@ -13,9 +13,12 @@ import {
   SectionList,
 } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Icon, Left, Body, Button } from 'native-base';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
+
 import { MonoText } from '../components/StyledText';
 import ChatInputBox from '../components/ChatInputBox';
 import { PrintPost } from '../components/PrintPost';
+
 export default function HomeScreen() {
   var [messageArray, setMessageArray] = useState([])
   var [timeArray, setTimeArray] = useState([])
@@ -59,11 +62,30 @@ export default function HomeScreen() {
   for(i=0;i<messages.length;i++){
     array.push(<PrintPost title={emails[messages.length-i-1]} date={new Date(timeArray[messages.length-i-1]).toDateString()} message={messageArray[messages.length-i-1]} thumbnail={thumbnails[messages.length-i-1]}></PrintPost>);
  }
+
+    } 
+
+    // firestore.collection("chat").get().then(function(querySnapshot) {
+    //     querySnapshot.forEach(function(doc) {
+    //       if (doc.exists) {
+    //         console.warn("Document data:", doc.data());
+    //       } else {
+    //         // doc.data() will be undefined in this case
+    //         console.warn("No such document!");
+    //       }
+    //     });
+    // }).catch(function(error) {
+    //     console.warn("Error getting document:", error);
+    // });
+    // }
+  }
+
   return (
     <View style={styles.container}>
     <ScrollView
       style={styles.container}
       contentContainerStyle={styles.contentContainer}>
+
 
         {array}
 
@@ -77,7 +99,6 @@ export default function HomeScreen() {
           style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
           <MonoText>screens/HomeScreen.js</MonoText>
         </View>
-
         <Text style={styles.getStartedText}>
           Change this text and your app will automatically reload.
 
@@ -89,11 +110,13 @@ export default function HomeScreen() {
       <Button
         title={'GET'}
         style={styles.sendBox}
+
         onPress={() =>  {getData();} }
       />
     </ScrollView>
+    <KeyboardSpacer />
   </View>
-);
+  );
 
 }
 
