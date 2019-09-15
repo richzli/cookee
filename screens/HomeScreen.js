@@ -1,5 +1,5 @@
 import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
+import React, { Component } from 'react';
 import {
   Image,
   Platform,
@@ -9,31 +9,28 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-
+import { Container, Header, Content, Card, CardItem, Thumbnail, Icon, Left, Body, Button } from 'native-base';
 import { MonoText } from '../components/StyledText';
+<<<<<<< Updated upstream
 import ChatInputBox from '../components/ChatInputBox';
+=======
+import { PrintPost } from '../components/PrintPost';
+>>>>>>> Stashed changes
 
 export default function HomeScreen() {
   return (
+    
+
     <View style={styles.container}>
+      <PrintPost title="hi" date={new Date().toDateString()} message="test message"></PrintPost>
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
-        <View style={styles.welcomeContainer}>
-          <Image
-            source={
-              __DEV__
-                ? require('../assets/images/robot-dev.png')
-                : require('../assets/images/robot-prod.png')
-            }
-            style={styles.welcomeImage}
-          />
-        </View>
-
         <View style={styles.getStartedContainer}>
           <DevelopmentModeNotice />
 
-          <Text style={styles.getStartedText}>Get started by opening</Text>
+           
+          <Text style={styles.getStartedText}>REEEEEE</Text>
 
           <View
             style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
@@ -195,3 +192,4 @@ const styles = StyleSheet.create({
     borderBottomColor: "#111111"
   }
 });
+
