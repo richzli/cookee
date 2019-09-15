@@ -47,7 +47,7 @@ import {
               <Left>
                 <Body>
                   <Text style={styles.wordBold}>{props.title}</Text>
-                  <Text note style={styles.italicText}>{props.date}</Text>
+                  <Text style={styles.italicText}>{props.date}</Text>
                 </Body>
               </Left>
             </CardItem>
