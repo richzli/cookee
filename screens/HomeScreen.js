@@ -12,6 +12,8 @@ import {
   SectionList,
 } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Icon, Left, Body, Button } from 'native-base';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
+
 import { MonoText } from '../components/StyledText';
 import ChatInputBox from '../components/ChatInputBox';
 import { PrintPost } from '../components/PrintPost';
@@ -82,7 +84,6 @@ export default function HomeScreen() {
           style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
           <MonoText>screens/HomeScreen.js</MonoText>
         </View>
-
         <Text style={styles.getStartedText}>
           Change this text and your app will automatically reload.
 
@@ -97,6 +98,7 @@ export default function HomeScreen() {
         onPress={() => { getData() }}
       />
     </ScrollView>
+    <KeyboardSpacer />
   </View>
   );
 
