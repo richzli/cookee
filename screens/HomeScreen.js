@@ -1,5 +1,5 @@
 import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
+import React, { Component } from 'react';
 import {
   Image,
   Platform,
@@ -8,39 +8,30 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Button,
 } from 'react-native';
-
+import { Container, Header, Content, Card, CardItem, Thumbnail, Icon, Left, Body, Button } from 'native-base';
 import { MonoText } from '../components/StyledText';
+import ChatInputBox from '../components/ChatInputBox';
+import { getNewDataSource } from 'react-native/Libraries/Experimental/SwipeableRow/SwipeableListView';
+import { firestore } from '../config/firebase';
+import { PrintPost } from '../components/PrintPost';
+
 
 export default function HomeScreen() {
-
-  state = {
-    name: "",
-    ingredients: []
-  }
-
-  const { name, ingredients } = this.state
-
   return (
+    
+
     <View style={styles.container}>
+      <PrintPost title="hi" date={new Date().toDateString()} message="test message"></PrintPost>
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
-        <View style={styles.welcomeContainer}>
-          <Image
-            source={
-              __DEV__
-                ? require('../assets/images/robot-dev.png')
-                : require('../assets/images/robot-prod.png')
-            }
-            style={styles.welcomeImage}
-          />
-        </View>
-
         <View style={styles.getStartedContainer}>
           <DevelopmentModeNotice />
 
-          <Text style={styles.getStartedText}>Get started by opening</Text>
+           
+          <Text style={styles.getStartedText}>REEEEEE</Text>
 
           <View
             style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
@@ -59,20 +50,14 @@ export default function HomeScreen() {
             </Text>
           </TouchableOpacity>
         </View>
+
+        <ChatInputBox />
+        <Button 
+         title={'GET'}
+         style={styles.sendBox}
+         onPress={() => { getData(); }}
+        />
       </ScrollView>
-
-      <View style={styles.tabBarInfoContainer}>
-        <Text style={styles.tabBarInfoText}>
-          This is a tab bar. You can edit it in:
-        </Text>
-
-        <View
-          style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-          <MonoText style={styles.codeHighlightText}>
-            navigation/MainTabNavigator.js
-          </MonoText>
-        </View>
-      </View>
     </View>
   );
 }
@@ -80,6 +65,23 @@ export default function HomeScreen() {
 HomeScreen.navigationOptions = {
   header: null,
 };
+
+function getData() {
+  // var docRef = db.collection("chat").doc("XLOK7PlDGmhEcM0SqlYo");
+
+  firestore.collection("chat").get().then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+        if (doc.exists) {
+          console.warn("Document data:", doc.data());
+        } else {
+          // doc.data() will be undefined in this case
+          console.warn("No such document!");
+        }
+      });
+  }).catch(function(error) {
+      console.warn("Error getting document:", error);
+  });
+}
 
 function DevelopmentModeNotice() {
   if (__DEV__) {
@@ -213,3 +215,4 @@ const styles = StyleSheet.create({
     borderBottomColor: "#111111"
   }
 });
+
