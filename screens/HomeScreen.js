@@ -63,7 +63,6 @@ export default function HomeScreen() {
     array.push(<PrintPost title={emails[messages.length-i-1]} date={new Date(timeArray[messages.length-i-1]).toDateString()} message={messageArray[messages.length-i-1]} thumbnail={thumbnails[messages.length-i-1]}></PrintPost>);
  }
 
-    } 
 
     // firestore.collection("chat").get().then(function(querySnapshot) {
     //     querySnapshot.forEach(function(doc) {
@@ -78,7 +77,6 @@ export default function HomeScreen() {
     //     console.warn("Error getting document:", error);
     // });
     // }
-  }
 
   return (
     <View style={styles.container}>
