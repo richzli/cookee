@@ -1,5 +1,5 @@
 import * as WebBrowser from 'expo-web-browser';
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import {
   Image,
   Platform,
@@ -8,7 +8,6 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Button,
 } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Icon, Left, Body, Button } from 'native-base';
 import { MonoText } from '../components/StyledText';
@@ -19,69 +18,101 @@ import { PrintPost } from '../components/PrintPost';
 
 
 export default function HomeScreen() {
-  return (
-    
+  const [messageText, setMessageText] = useState('')
+  const [timestampValue, setTimestampValue] = useState(0)
 
-    <View style={styles.container}>
-      <PrintPost title="hi" date={new Date().toDateString()} message="test message"></PrintPost>
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}>
-        <View style={styles.getStartedContainer}>
-          <DevelopmentModeNotice />
+  getData = async () => {
+    try {
+      const doc = await firestore.collection('chat').doc('XLOK7PlDGmhEcM0SqlYo').get()
+      if (doc.exists) {
+        console.warn("Document data:", doc.data());
+        const { message, timestamp } = doc.data();
+        setMessageText(message);
+      } else {
+        // doc.data() will be undefined in this case
+        console.warn("No such document!");
+      }
+    } catch (error) {
+      console.error("Error getting document:", error);
+    }
 
-           
-          <Text style={styles.getStartedText}>REEEEEE</Text>
 
-          <View
-            style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-            <MonoText>screens/HomeScreen.js</MonoText>
-          </View>
+  
+}
 
-          <Text style={styles.getStartedText}>
-            Change this text and your app will automatically reload.
+return (
+  <View style={styles.container}>
+    <PrintPost title="hi" date={new Date().toDateString()} message={messageText}></PrintPost>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.contentContainer}>
+      <View style={styles.getStartedContainer}>
+        <DevelopmentModeNotice />
+
+
+        <Text style={styles.getStartedText}>REEEEEE</Text>
+
+        <View
+          style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
+          <MonoText>screens/HomeScreen.js</MonoText>
+        </View>
+
+        <Text style={styles.getStartedText}>
+          Change this text and your app will automatically reload.
           </Text>
-        </View>
+      </View>
 
-        <View style={styles.helpContainer}>
-          <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-            <Text style={styles.helpLinkText}>
-              Help, it didn’t automatically reload!
+      <View style={styles.helpContainer}>
+        <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
+          <Text style={styles.helpLinkText}>
+            Help, it didn’t automatically reload!
             </Text>
-          </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
+      </View>
 
-        <ChatInputBox />
-        <Button 
-         title={'GET'}
-         style={styles.sendBox}
-         onPress={() => { getData(); }}
-        />
-      </ScrollView>
-    </View>
-  );
+      <ChatInputBox />
+      <Button
+        title={'GET'}
+        style={styles.sendBox}
+        onPress={() => { getData(); }}
+      />
+    </ScrollView>
+  </View>
+);
+
 }
 
 HomeScreen.navigationOptions = {
   header: null,
 };
 
-function getData() {
-  // var docRef = db.collection("chat").doc("XLOK7PlDGmhEcM0SqlYo");
+// function getData() {
+//   firestore.collection('chat').doc('XLOK7PlDGmhEcM0SqlYo').get().then(function(doc) {
+//     if (doc.exists) {
+//         console.warn("Document data:", doc.data());
+//         const {message, timestamp} = doc.data();
+//         this.setState({ messageText: message });
+//     } else {
+//         // doc.data() will be undefined in this case
+//         console.warn("No such document!");
+//     }
+//   }).catch(function(error) {
+//       console.warn("Error getting document:", error);
+//   });
 
-  firestore.collection("chat").get().then(function(querySnapshot) {
-      querySnapshot.forEach(function(doc) {
-        if (doc.exists) {
-          console.warn("Document data:", doc.data());
-        } else {
-          // doc.data() will be undefined in this case
-          console.warn("No such document!");
-        }
-      });
-  }).catch(function(error) {
-      console.warn("Error getting document:", error);
-  });
-}
+// firestore.collection("chat").get().then(function(querySnapshot) {
+//     querySnapshot.forEach(function(doc) {
+//       if (doc.exists) {
+//         console.warn("Document data:", doc.data());
+//       } else {
+//         // doc.data() will be undefined in this case
+//         console.warn("No such document!");
+//       }
+//     });
+// }).catch(function(error) {
+//     console.warn("Error getting document:", error);
+// });
+// }
 
 function DevelopmentModeNotice() {
   if (__DEV__) {
