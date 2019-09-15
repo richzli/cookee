@@ -1,5 +1,5 @@
 import * as WebBrowser from 'expo-web-browser';
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import {
   Image,
   Platform,
@@ -24,6 +24,28 @@ const DATA = [
 ]
 
 export default function HomeScreen() {
+  const [messageText, setMessageText] = useState('')
+  const [timestampValue, setTimestampValue] = useState(0)
+
+  getData = async () => {
+    try {
+      const doc = await firestore.collection('chat').doc('XLOK7PlDGmhEcM0SqlYo').get()
+      if (doc.exists) {
+        console.warn("Document data:", doc.data());
+        const { message, timestamp } = doc.data();
+        setMessageText(message);
+      } else {
+        // doc.data() will be undefined in this case
+        console.warn("No such document!");
+      }
+    } catch (error) {
+      console.error("Error getting document:", error);
+    }
+
+
+  
+}
+
   return (
     <View style={styles.container}>
     <ScrollView
@@ -50,41 +72,54 @@ export default function HomeScreen() {
 
         <Text style={styles.getStartedText}>
           Change this text and your app will automatically reload.
+
         </Text>
       </View>
 
 
-        <ChatInputBox />
-        <Button 
-         title={'GET'}
-         style={styles.sendBox}
-         onPress={() => { getData(); }}
-        />
-      </ScrollView>
-    </View>
-  );
+      <ChatInputBox />
+      <Button
+        title={'GET'}
+        style={styles.sendBox}
+        onPress={() => { getData(); }}
+      />
+    </ScrollView>
+  </View>
+);
+
 }
 
 HomeScreen.navigationOptions = {
   header: null,
 };
 
-function getData() {
-  // var docRef = db.collection("chat").doc("XLOK7PlDGmhEcM0SqlYo");
+// function getData() {
+//   firestore.collection('chat').doc('XLOK7PlDGmhEcM0SqlYo').get().then(function(doc) {
+//     if (doc.exists) {
+//         console.warn("Document data:", doc.data());
+//         const {message, timestamp} = doc.data();
+//         this.setState({ messageText: message });
+//     } else {
+//         // doc.data() will be undefined in this case
+//         console.warn("No such document!");
+//     }
+//   }).catch(function(error) {
+//       console.warn("Error getting document:", error);
+//   });
 
-  firestore.collection("chat").get().then(function(querySnapshot) {
-      querySnapshot.forEach(function(doc) {
-        if (doc.exists) {
-          console.warn("Document data:", doc.data());
-        } else {
-          // doc.data() will be undefined in this case
-          console.warn("No such document!");
-        }
-      });
-  }).catch(function(error) {
-      console.warn("Error getting document:", error);
-  });
-}
+// firestore.collection("chat").get().then(function(querySnapshot) {
+//     querySnapshot.forEach(function(doc) {
+//       if (doc.exists) {
+//         console.warn("Document data:", doc.data());
+//       } else {
+//         // doc.data() will be undefined in this case
+//         console.warn("No such document!");
+//       }
+//     });
+// }).catch(function(error) {
+//     console.warn("Error getting document:", error);
+// });
+// }
 
 function DevelopmentModeNotice() {
   if (__DEV__) {
