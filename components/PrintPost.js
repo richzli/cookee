@@ -35,7 +35,7 @@ import {
               <Left>
                 <Button transparent textStyle={{color: '#87838B'}}>
                   {/* <Icon name="logo-github" /> */}
-                  <Text>{props.stars} likes</Text>
+                  <Text>{props.likes} likes</Text>
                 </Button>
               </Left>
             </CardItem>

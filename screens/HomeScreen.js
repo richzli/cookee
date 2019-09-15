@@ -11,6 +11,8 @@ import {
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
+import ChatInputBox from '../components/ChatInputBox';
+import { PrintPost } from '../components/PrintPost';
 
 export default function HomeScreen() {
 
@@ -23,6 +25,7 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
+      <PrintPost>title="dab" date={newDate().toDateString()} message="heya" likes=342</PrintPost>
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
