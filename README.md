@@ -1,15 +1,15 @@
 # cookee
 
-A forum app to talk about food!
+A social media app to share and make food together!
 
 ## Dependencies
 
-npm install firebase
-
-npm install react-native-keyboard-spacer
-
-npm install native-base --save
+firebase, react-native-keyboard-spacer, native-base
 
 ## To run
 
-'expo start'
+1. Download the Expo app.
+
+2. `expo start`, and scan the QR code.
+
+3. The app should start loading in on Expo.
