@@ -8,10 +8,13 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Button,
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
 import ChatInputBox from '../components/ChatInputBox';
+import { getNewDataSource } from 'react-native/Libraries/Experimental/SwipeableRow/SwipeableListView';
+import { firestore } from '../config/firebase';
 
 export default function HomeScreen() {
   return (
@@ -54,6 +57,11 @@ export default function HomeScreen() {
         </View>
 
         <ChatInputBox />
+        <Button 
+         title={'GET'}
+         style={styles.sendBox}
+         onPress={() => { getData(); }}
+        />
       </ScrollView>
     </View>
   );
@@ -62,6 +70,23 @@ export default function HomeScreen() {
 HomeScreen.navigationOptions = {
   header: null,
 };
+
+function getData() {
+  // var docRef = db.collection("chat").doc("XLOK7PlDGmhEcM0SqlYo");
+
+  firestore.collection("chat").get().then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+        if (doc.exists) {
+          console.warn("Document data:", doc.data());
+        } else {
+          // doc.data() will be undefined in this case
+          console.warn("No such document!");
+        }
+      });
+  }).catch(function(error) {
+      console.warn("Error getting document:", error);
+  });
+}
 
 function DevelopmentModeNotice() {
   if (__DEV__) {
