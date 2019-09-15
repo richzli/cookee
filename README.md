@@ -1,8 +1,12 @@
 # cookee
 
-A food-sharing app!
+A chat? app
 
 ## Dependencies
 
 yarn add firebase
-yarn add --dev react-native-dotenv
+
+yarn add react-native-google-signin
+
+npm install native-base --save
+

@@ -9,7 +9,7 @@ import {
 
 import { firestore } from '../config/firebase';
 
-export default class CookInput extends Component<{}> {
+export default class CookInput extends Component {
   constructor(props) {
 	  super(props);
     state = {
