@@ -11,12 +11,14 @@ import {
   import { Container, Header, Content, Card, CardItem, Thumbnail, Icon, Left, Body, Button } from 'native-base';
 
   export function PrintPost(props){
+    
     return(
         <Content>      
 <Card style={{flex: 0, overflow: "scroll"}}>
    
             <CardItem>
               <Left>
+                <Thumbnail source = {{uri: props.url}} />
                 <Body>
                   <Text style={styles.wordBold}>{props.title}</Text>
                   <Text style={styles.italicText}>{props.date}</Text>
@@ -34,7 +36,7 @@ import {
               <Left>
                 <Button transparent textStyle={{color: '#87838B'}}>
                   {/* <Icon name="logo-github" /> */}
-                  <Text>{props.likes} likes</Text>
+                  <Text></Text>
                 </Button>
               </Left>
             </CardItem>

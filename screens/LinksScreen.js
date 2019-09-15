@@ -1,15 +1,30 @@
-import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import React, {Component, useState} from 'react';
 import { ExpoLinksView } from '@expo/samples';
+import ChatInputBox from '../components/ChatInputBox';
+import {
+  Image,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+  View,
+  SectionList,
+} from 'react-native';
+import { Container, Header, Content, Card, CardItem, Thumbnail, Icon, Left, Body, Button } from 'native-base';
 
 export default function LinksScreen() {
+
+
   return (
     <ScrollView style={styles.container}>
-      {/**
-       * Go ahead and delete ExpoLinksView and replace it with your content;
-       * we just wanted to provide you with some helpful links.
-       */}
-      <ExpoLinksView />
+       <ChatInputBox />
+      <Button
+        title={'GET'}
+        style={styles.sendBox}
+        onPress={() => { getData(); }}
+      />
     </ScrollView>
   );
 }
