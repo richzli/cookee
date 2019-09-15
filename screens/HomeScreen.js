@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
-import CookInput from '../components/CookInput';
+import ChatInputBox from '../components/ChatInputBox';
 
 export default function HomeScreen() {
   return (
@@ -52,6 +52,8 @@ export default function HomeScreen() {
             </Text>
           </TouchableOpacity>
         </View>
+
+        <ChatInputBox />
       </ScrollView>
     </View>
   );
