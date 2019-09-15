@@ -10,6 +10,34 @@ import {
   } from 'react-native';
   import { Container, Header, Content, Card, CardItem, Thumbnail, Icon, Left, Body, Button } from 'native-base';
   
+  const styles = StyleSheet.create ({
+   container: {
+      alignItems: 'center',
+      marginTop: 100,
+      padding: 20
+   },
+   text: {
+      color: 'black',
+   },
+   capitalLetter: {
+      color: 'black',
+      fontSize: 20
+   },
+   wordBold: {
+      fontWeight: 'bold',
+      color: 'black'
+   },
+   italicText: {
+      color: 'grey',
+      fontStyle: 'italic'
+   },
+   textShadow: {
+      textShadowColor: 'red',
+      textShadowOffset: { width: 2, height: 2 },
+      textShadowRadius : 5
+   }
+})
+
   export function PrintPost(props){
     return(
         <Content>      
@@ -18,8 +46,8 @@ import {
             <CardItem>
               <Left>
                 <Body>
-                  <Text>{props.title}</Text>
-                  <Text note>{props.date}</Text>
+                  <Text style={styles.wordBold}>{props.title}</Text>
+                  <Text note style={styles.italicText}>{props.date}</Text>
                 </Body>
               </Left>
             </CardItem>
