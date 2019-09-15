@@ -1,6 +1,6 @@
-import * as WebBrowser from 'expo-web-browser';
-import React, { Component, useState } from 'react';
-import {firestore} from '../config/firebase';
+import * as WebBrowser from "expo-web-browser";
+import React, { Component, useState } from "react";
+import firestore from "../config/firebase";
 import {
   Image,
   Platform,
@@ -11,20 +11,31 @@ import {
   TouchableOpacity,
   View,
   SectionList,
-} from 'react-native';
-import { Container, Header, Content, Card, CardItem, Thumbnail, Icon, Left, Body, Button } from 'native-base';
-import KeyboardSpacer from 'react-native-keyboard-spacer';
+  Button
+} from "react-native";
+import {
+  Container,
+  Header,
+  Content,
+  Card,
+  CardItem,
+  Thumbnail,
+  Icon,
+  Left,
+  Body
+} from "native-base";
+import KeyboardSpacer from "react-native-keyboard-spacer";
 
-import { MonoText } from '../components/StyledText';
-import ChatInputBox from '../components/ChatInputBox';
-import { PrintPost } from '../components/PrintPost';
+import { MonoText } from "../components/StyledText";
+import ChatInputBox from "../components/ChatInputBox";
+import { PrintPost } from "../components/PrintPost";
 
 export default function HomeScreen() {
-  var [messageArray, setMessageArray] = useState([])
-  var [timeArray, setTimeArray] = useState([])
-  var [messages, setMessages] = useState([])
-  var [emails, setEmails] = useState([])
-  var [thumbnails, setThumbnails] = useState([])
+  var [messageArray, setMessageArray] = useState([]);
+  var [timeArray, setTimeArray] = useState([]);
+  var [messages, setMessages] = useState([]);
+  var [emails, setEmails] = useState([]);
+  var [thumbnails, setThumbnails] = useState([]);
   var e = [];
   var m = [];
   var t = [];
@@ -33,95 +44,111 @@ export default function HomeScreen() {
   var messagess = [];
   getData = async () => {
     try {
-      const {docs} = await firestore.collection('chat').orderBy('timestamp', 'desc').limit(5).get();
+      // console.log("i was here");
+      const { docs } = await firestore
+        .collection("chat")
+        .orderBy("timestamp", "desc")
+        .limit(5)
+        .get();
+      // console.log("i was here 2");
       messagess = docs.map(doc => doc.data());
 
-      console.log(messagess)
-      for(i=0;i<messagess.length;i++){
-        const {message, timestamp, useremail,thumbnail} = messagess[i];
+      // messagess = firestore
+      //   .collection("chat")
+      //   .orderBy("timestamp", "desc")
+      //   .limit(5)
+      //   .get()
+      //   .then(docs => {
+      //     docs.map(doc => {
+      //       doc.data();
+      //     });
+      //   });
+
+      // console.log(" i was here 2 ");
+
+      console.log(messagess);
+      for (i = messagess.length - 1; i >= 0; i--) {
+        const { message, timestamp, useremail, thumbnail } = messagess[i];
         m.push(message);
         t.push(timestamp);
-        e.push(useremail)
+        e.push(useremail);
       }
-      
-      console.log(m)
-      console.log(t)
+
+      console.log(m);
+      console.log(t);
       setMessageArray(m);
       setTimeArray(t);
       setMessages(messagess);
       setEmails(e);
       setThumbnails(th);
-      
-  
     } catch (error) {
       console.error("Error getting document:", error);
     }
+  };
+
+  for (i = 0; i < messages.length; i++) {
+    array.push(
+      <PrintPost
+        title={emails[messages.length - i - 1]}
+        date={new Date(timeArray[messages.length - i - 1]).toDateString()}
+        message={messageArray[messages.length - i - 1]}
+        thumbnail={thumbnails[messages.length - i - 1]}
+      ></PrintPost>
+    );
   }
 
-  
-  for(i=0;i<messages.length;i++){
-    array.push(<PrintPost title={emails[messages.length-i-1]} date={new Date(timeArray[messages.length-i-1]).toDateString()} message={messageArray[messages.length-i-1]} thumbnail={thumbnails[messages.length-i-1]}></PrintPost>);
- }
-
-    } 
-
-    // firestore.collection("chat").get().then(function(querySnapshot) {
-    //     querySnapshot.forEach(function(doc) {
-    //       if (doc.exists) {
-    //         console.warn("Document data:", doc.data());
-    //       } else {
-    //         // doc.data() will be undefined in this case
-    //         console.warn("No such document!");
-    //       }
-    //     });
-    // }).catch(function(error) {
-    //     console.warn("Error getting document:", error);
-    // });
-    // }
-  }
+  // firestore.collection("chat").get().then(function(querySnapshot) {
+  //     querySnapshot.forEach(function(doc) {
+  //       if (doc.exists) {
+  //         console.warn("Document data:", doc.data());
+  //       } else {
+  //         // doc.data() will be undefined in this case
+  //         console.warn("No such document!");
+  //       }
+  //     });
+  // }).catch(function(error) {
+  //     console.warn("Error getting document:", error);
+  // });
+  // }
 
   return (
     <View style={styles.container}>
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.contentContainer}>
-
-
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}
+      >
         {array}
 
-      <View style={styles.getStartedContainer}>
-        <DevelopmentModeNotice />
-        
-         
-        <Text style={styles.getStartedText}>REEEEEE</Text>
+        {/* <View style={styles.getStartedContainer}>
+          <DevelopmentModeNotice />
 
-        <View
-          style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-          <MonoText>screens/HomeScreen.js</MonoText>
-        </View>
-        <Text style={styles.getStartedText}>
-          Change this text and your app will automatically reload.
+          <Text style={styles.getStartedText}>REEEEEE</Text>
 
-        </Text>
-      </View>
+          <View
+            style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
+          >
+            <MonoText>screens/HomeScreen.js</MonoText>
+          </View>
+          <Text style={styles.getStartedText}>
+            Change this text and your app will automatically reload.
+          </Text>
+        </View> */}
 
-
-      <ChatInputBox />
-      <Button
-        title={'GET'}
-        style={styles.sendBox}
-
-        onPress={() =>  {getData();} }
-      />
-    </ScrollView>
-    <KeyboardSpacer />
-  </View>
+        <ChatInputBox />
+        <Button
+          title={"Get Recent Posts"}
+          onPress={() => {
+            getData();
+          }}
+        />
+      </ScrollView>
+      <KeyboardSpacer />
+    </View>
   );
-
 }
 
 HomeScreen.navigationOptions = {
-  header: null,
+  header: null
 };
 
 // function getData() {
@@ -177,102 +204,102 @@ function DevelopmentModeNotice() {
 
 function handleLearnMorePress() {
   WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/workflow/development-mode/'
+    "https://docs.expo.io/versions/latest/workflow/development-mode/"
   );
 }
 
 function handleHelpPress() {
   WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/workflow/up-and-running/#cant-see-your-changes'
+    "https://docs.expo.io/versions/latest/workflow/up-and-running/#cant-see-your-changes"
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff"
   },
   developmentModeText: {
     marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
+    color: "rgba(0,0,0,0.4)",
     fontSize: 14,
     lineHeight: 19,
-    textAlign: 'center',
+    textAlign: "center"
   },
   contentContainer: {
-    paddingTop: 30,
+    paddingTop: 30
   },
   welcomeContainer: {
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 10,
-    marginBottom: 20,
+    marginBottom: 20
   },
   welcomeImage: {
     width: 100,
     height: 80,
-    resizeMode: 'contain',
+    resizeMode: "contain",
     marginTop: 3,
-    marginLeft: -10,
+    marginLeft: -10
   },
   getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
+    alignItems: "center",
+    marginHorizontal: 50
   },
   homeScreenFilename: {
-    marginVertical: 7,
+    marginVertical: 7
   },
   codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
+    color: "rgba(96,100,109, 0.8)"
   },
   codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
+    backgroundColor: "rgba(0,0,0,0.05)",
     borderRadius: 3,
-    paddingHorizontal: 4,
+    paddingHorizontal: 4
   },
   getStartedText: {
     fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
+    color: "rgba(96,100,109, 1)",
     lineHeight: 24,
-    textAlign: 'center',
+    textAlign: "center"
   },
   tabBarInfoContainer: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
     left: 0,
     right: 0,
     ...Platform.select({
       ios: {
-        shadowColor: 'black',
+        shadowColor: "black",
         shadowOffset: { width: 0, height: -3 },
         shadowOpacity: 0.1,
-        shadowRadius: 3,
+        shadowRadius: 3
       },
       android: {
-        elevation: 20,
-      },
+        elevation: 20
+      }
     }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
+    alignItems: "center",
+    backgroundColor: "#fbfbfb",
+    paddingVertical: 20
   },
   tabBarInfoText: {
     fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
+    color: "rgba(96,100,109, 1)",
+    textAlign: "center"
   },
   navigationFilename: {
-    marginTop: 5,
+    marginTop: 5
   },
   helpContainer: {
     marginTop: 15,
-    alignItems: 'center',
+    alignItems: "center"
   },
   helpLink: {
-    paddingVertical: 15,
+    paddingVertical: 15
   },
   helpLinkText: {
     fontSize: 14,
-    color: '#2e78b7',
+    color: "#2e78b7"
   },
   textInput: {
     height: 30,
@@ -284,3 +311,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#111111"
   }
 });
+
+HomeScreen.navigationOptions = {
+  title: "Feed"
+};

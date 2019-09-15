@@ -24,15 +24,11 @@ const HomeStack = createStackNavigator(
 );
 
 HomeStack.navigationOptions = {
-  tabBarLabel: "Home",
+  tabBarLabel: "Feed",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={
-        Platform.OS === "ios"
-          ? `ios-information-circle${focused ? "" : "-outline"}`
-          : "md-information-circle"
-      }
+      name={Platform.OS === "ios" ? "ios-text" : "md-text"}
     />
   )
 };
@@ -98,7 +94,6 @@ LoginStack.path = "";
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
-  LinksStack,
   SettingsStack,
   LoginStack
 });
