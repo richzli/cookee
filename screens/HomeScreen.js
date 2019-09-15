@@ -1,89 +1,140 @@
 import * as WebBrowser from 'expo-web-browser';
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import {
   Image,
   Platform,
   ScrollView,
   StyleSheet,
   Text,
+  SafeAreaView,
   TouchableOpacity,
-  View
+  View,
+  SectionList,
 } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Icon, Left, Body, Button } from 'native-base';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 import { MonoText } from '../components/StyledText';
 import ChatInputBox from '../components/ChatInputBox';
-import { getNewDataSource } from 'react-native/Libraries/Experimental/SwipeableRow/SwipeableListView';
-import { firestore } from '../config/firebase';
 import { PrintPost } from '../components/PrintPost';
+import { firestore } from '../config/firebase';
 
+const DATA = [
+  {
+    titles: 'dab',
+    dates: ['134123','12321321'],
+  }
+]
 
 export default function HomeScreen() {
+  const [messageText, setMessageText] = useState('');
+  const [timestampValue, setTimestampValue] = useState(0);
+
+  getData = async () => {
+    try {
+      const doc = await firestore.collection('chat').doc('XLOK7PlDGmhEcM0SqlYo').get();
+
+      if (doc.exists) {
+        console.warn("Document data:", doc.data());
+        const { message, timestamp } = doc.data();
+        setMessageText(message);
+      } else {
+        // doc.data() will be undefined in this case
+        console.warn("No such document!");
+      }
+    } catch (error) {
+      console.error("Error getting document:", error);
+    } 
+
+    // firestore.collection("chat").get().then(function(querySnapshot) {
+    //     querySnapshot.forEach(function(doc) {
+    //       if (doc.exists) {
+    //         console.warn("Document data:", doc.data());
+    //       } else {
+    //         // doc.data() will be undefined in this case
+    //         console.warn("No such document!");
+    //       }
+    //     });
+    // }).catch(function(error) {
+    //     console.warn("Error getting document:", error);
+    // });
+    // }
+  }
+
   return (
-    
-
     <View style={styles.container}>
-      <PrintPost title="hi" date={new Date().toDateString()} message="test message"></PrintPost>
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}>
-        <View style={styles.getStartedContainer}>
-          <DevelopmentModeNotice />
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.contentContainer}>
+       
+        <PrintPost title="dab" date={new Date().toDateString()} message={messageText} likes="342"></PrintPost>
+        <PrintPost title="dab" date={new Date().toDateString()} message="heya" likes="342"></PrintPost>
+        <PrintPost title="dab" date={new Date().toDateString()} message="heya" likes="342"></PrintPost>
+        <PrintPost title="dab" date={new Date().toDateString()} message="heya" likes="342"></PrintPost>
+       
+ 
+        
+      <View style={styles.getStartedContainer}>
+        <DevelopmentModeNotice />
+        
+         
+        <Text style={styles.getStartedText}>REEEEEE</Text>
 
-           
-          <Text style={styles.getStartedText}>REEEEEE</Text>
-
-          <View
-            style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-            <MonoText>screens/HomeScreen.js</MonoText>
-          </View>
-
-          <Text style={styles.getStartedText}>
-            Change this text and your app will automatically reload.
-          </Text>
+        <View
+          style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
+          <MonoText>screens/HomeScreen.js</MonoText>
         </View>
+        <Text style={styles.getStartedText}>
+          Change this text and your app will automatically reload.
 
-        <View style={styles.helpContainer}>
-          <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-            <Text style={styles.helpLinkText}>
-              Help, it didn’t automatically reload!
-            </Text>
-          </TouchableOpacity>
-        </View>
+        </Text>
+      </View>
 
-        <ChatInputBox />
-        <Button 
-         title={'GET'}
-         style={styles.sendBox}
-         onPress={() => { getData(); }}
-        />
-      </ScrollView>
-      <KeyboardSpacer />
-    </View>
+
+      <ChatInputBox />
+      <Button
+        title={'GET'}
+        style={styles.sendBox}
+        onPress={() => { getData() }}
+      />
+    </ScrollView>
+    <KeyboardSpacer />
+  </View>
   );
+
 }
 
 HomeScreen.navigationOptions = {
   header: null,
 };
 
-function getData() {
-  // var docRef = db.collection("chat").doc("XLOK7PlDGmhEcM0SqlYo");
+// function getData() {
+//   firestore.collection('chat').doc('XLOK7PlDGmhEcM0SqlYo').get().then(function(doc) {
+//     if (doc.exists) {
+//         console.warn("Document data:", doc.data());
+//         const {message, timestamp} = doc.data();
+//         this.setState({ messageText: message });
+//     } else {
+//         // doc.data() will be undefined in this case
+//         console.warn("No such document!");
+//     }
+//   }).catch(function(error) {
+//       console.warn("Error getting document:", error);
+//   });
 
-  firestore.collection("chat").get().then(function(querySnapshot) {
-      querySnapshot.forEach(function(doc) {
-        if (doc.exists) {
-          console.warn("Document data:", doc.data());
-        } else {
-          // doc.data() will be undefined in this case
-          console.warn("No such document!");
-        }
-      });
-  }).catch(function(error) {
-      console.warn("Error getting document:", error);
-  });
-}
+// firestore.collection("chat").get().then(function(querySnapshot) {
+//     querySnapshot.forEach(function(doc) {
+//       if (doc.exists) {
+//         console.warn("Document data:", doc.data());
+//       } else {
+//         // doc.data() will be undefined in this case
+//         console.warn("No such document!");
+//       }
+//     });
+// }).catch(function(error) {
+//     console.warn("Error getting document:", error);
+// });
+// }
 
 function DevelopmentModeNotice() {
   if (__DEV__) {
