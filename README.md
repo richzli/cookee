@@ -6,7 +6,5 @@ A chat? app
 
 yarn add firebase
 
-yarn add react-native-google-signin
-
 npm install native-base --save
 

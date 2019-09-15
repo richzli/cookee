@@ -7,7 +7,7 @@ import {
 	Button,
 } from 'react-native';
 
-import { firestore } from '../config/firebase';
+import firestore from '../config/firebase';
 
 export default class ChatInputBox extends Component {
   state = {
